@@ -1,0 +1,32 @@
+<div class="todo-container">
+  <div class="body-container">
+    <mat-card class="todo-card">
+      <mat-card-header>
+        <div mat-card-avatar class="todo-card-header-image"></div>
+        <mat-card-title>Muhammad Mehdi</mat-card-title>
+        <mat-card-subtitle>IOmechs</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-title class="todo-title">TODO LIST</mat-card-title>
+      <mat-card-content class="todo-card-table">
+        <mat-list>
+          <mat-list-item class="todo-list-item" *ngFor ="let todo of todos$ | async">
+            {{todo.desc}}
+            <mat-icon class="todo-icon" (click)="removeTodo(todo)">close</mat-icon>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <div>
+        <form  class="input-container" [formGroup]="todoForm" (submit)="onSubmit()">
+          <mat-form-field>
+              <input matInput placeholder="Enter Todo" formControlName = "todo">
+              <mat-error *ngIf="todoControls.todo.hasError('required')">
+                  Todo is <strong>required</strong>.
+              </mat-error>
+            </mat-form-field>
+            <button class="todo-submit" mat-raised-button color="primary" [disabled]="todoForm.invalid" >Add</button>
+        </form>
+
+      </div>
+    </mat-card>
+  </div>
+</div>
